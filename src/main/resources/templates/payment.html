@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HDFC Payment</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: white;
+            padding: 35px;
+            width: 400px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>HDFC Net Banking</h2>
+
+
+    <form action="/payment/initiate" method="post">
+
+        <label>Amount</label>
+
+        <input
+                type="number"
+                name="amount"
+                value="1"
+                min="1"
+                required>
+
+        <label>Order ID</label>
+
+        <input
+                type="text"
+                name="orderId"
+                value="ORD-1001"
+                required>
+
+        <button type="submit">
+            Pay
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

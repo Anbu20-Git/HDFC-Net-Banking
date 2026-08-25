@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Result</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .box {
+            background: white;
+            width: 450px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .success {
+            color: green;
+        }
+
+        .pending {
+            color: orange;
+        }
+
+        .failed {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>HDFC Payment Result</h2>
+
+    <div th:if="${payment != null}">
+
+        <p>
+            <b>Payment ID:</b>
+            <span th:text="${paymentId}"></span>
+        </p>
+
+        <p>
+            <b>Amount:</b>
+            ₹<span th:text="${payment.amount}"></span>
+        </p>
+
+        <p>
+            <b>Order ID:</b>
+            <span th:text="${payment.order_id}"></span>
+        </p>
+
+        <h2 th:text="${payment.status}">
+        </h2>
+
+    </div>
+
+    <div th:if="${error != null}">
+
+        <h3 style="color:red;"
+            th:text="${error}">
+        </h3>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.hdfc.netbanking.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -12,15 +13,17 @@ import com.hdfc.netbanking.dto.PaymentRequest;
 public class PaymentGatewayClient {
 
     private final RestClient restClient;
+    private final String apiKey;
 
-    private static final String API_KEY =
-            "sk_test_a7uRFh08FhkNmwmAgcRZZHlJyuuIQenS";
-
-    public PaymentGatewayClient(RestClient.Builder builder) {
+    public PaymentGatewayClient(
+            RestClient.Builder builder,
+            @Value("${mock.gateway.base-url:https://mockgateway.com/api/pg/anbu-selvan-2IQQ8l}") String baseUrl,
+            @Value("${mock.gateway.api-key:sk_test_a7uRFh08FhkNmwmAgcRZZHlJyuuIQenS}") String apiKey) {
 
         this.restClient = builder
-                .baseUrl("http://localhost:9090")
+                .baseUrl(baseUrl)
                 .build();
+        this.apiKey = apiKey;
     }
     
     public PaymentGatewayResponse markPaymentSuccess(
@@ -35,7 +38,7 @@ public class PaymentGatewayClient {
                 )
                 .header(
                     HttpHeaders.AUTHORIZATION,
-                    "Bearer " + API_KEY
+                    "Bearer " + this.apiKey
                 )
                 .retrieve()
                 .body(PaymentGatewayResponse.class);
@@ -48,7 +51,7 @@ public class PaymentGatewayClient {
                 .uri("/api/pg/anbu-selvan-2IQQ8l/verify/" + paymentId)
                 .header(
                         HttpHeaders.AUTHORIZATION,
-                        "Bearer " + API_KEY
+                        "Bearer " + this.apiKey
                 )
                 .retrieve()
                 .body(PaymentGatewayResponse.class);
@@ -71,7 +74,7 @@ public class PaymentGatewayClient {
                 .uri("/api/pg/anbu-selvan-2IQQ8l/payments")
                 .header(
                         HttpHeaders.AUTHORIZATION,
-                        "Bearer " + API_KEY
+                        "Bearer " + this.apiKey
                 )
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(request)

@@ -43,6 +43,10 @@ public class LoginController {
             Model model) {
 
         User user = userRepository.findByEmail(email).orElse(null);
+        
+        System.out.println("LOGIN EMAIL RECEIVED: [" + email + "]");
+        System.out.println("USER FOUND: " + (user != null));
+        System.out.println("ENTERED PASSWORD LENGTH: " + password.length());
 
         // Invalid login
         if (user == null ||

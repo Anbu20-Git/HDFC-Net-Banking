@@ -2,6 +2,7 @@ package com.hdfc.netbanking.service;
 
 import org.springframework.stereotype.Service;
 
+import com.hdfc.netbanking.dto.RegisterRequest;
 import com.hdfc.netbanking.entity.User;
 import com.hdfc.netbanking.repository.UserRepository;
 
@@ -14,7 +15,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User registerUser(User user) {
+    public User registerUser(RegisterRequest request) {
+
+        User user = new User();
+
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+        user.setPhone(request.getPhone());
 
         user.setRole("USER");
 

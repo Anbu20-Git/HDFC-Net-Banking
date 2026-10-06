@@ -1,6 +1,7 @@
 package com.hdfc.netbanking.service;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class DailyStatementService {
 
     public List<Transaction> getTodayTransactions() {
 
-        LocalDate today = LocalDate.now();
+    	LocalDate today = LocalDate.now(ZoneId.of("Asia/Kolkata"));
 
         LocalDateTime startOfDay = today.atStartOfDay();
 

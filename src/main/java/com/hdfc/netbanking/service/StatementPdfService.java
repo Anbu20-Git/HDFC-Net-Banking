@@ -1,8 +1,10 @@
 package com.hdfc.netbanking.service;
 
 import java.io.ByteArrayOutputStream;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class StatementPdfService {
 
     public byte[] generateDailyStatementPdf() throws Exception {
 
-        LocalDate today = LocalDate.now();
+    	LocalDate today = LocalDate.now(ZoneId.of("Asia/Kolkata"));
 
         LocalDateTime start = today.atStartOfDay();
 
@@ -50,7 +52,7 @@ public class StatementPdfService {
         document.add(new Paragraph("Date: " + today));
 
         String generatedTime =
-                LocalDateTime.now()
+        		LocalDateTime.now(ZoneId.of("Asia/Kolkata"))
                         .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
 
         document.add(new Paragraph(

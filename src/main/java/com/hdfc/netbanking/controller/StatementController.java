@@ -1,6 +1,8 @@
 package com.hdfc.netbanking.controller;
 
 import org.springframework.http.HttpHeaders;
+
+
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hdfc.netbanking.service.StatementPdfService;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 @RestController
@@ -27,7 +30,7 @@ public class StatementController {
                 statementPdfService.generateDailyStatementPdf();
 
         String time =
-                LocalDateTime.now()
+        		LocalDateTime.now(ZoneId.of("Asia/Kolkata"))
                         .format(DateTimeFormatter.ofPattern(
                                 "yyyy-MM-dd_HH-mm-ss"));
 

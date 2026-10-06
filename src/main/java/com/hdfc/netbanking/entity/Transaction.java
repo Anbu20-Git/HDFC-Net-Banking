@@ -1,6 +1,7 @@
 package com.hdfc.netbanking.entity;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import jakarta.persistence.*;
 
@@ -30,7 +31,7 @@ public class Transaction {
     @PrePersist
     public void setTransactionDate() {
         if (transactionDate == null) {
-            transactionDate = LocalDateTime.now();
+        	transactionDate = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
         }
     }
 

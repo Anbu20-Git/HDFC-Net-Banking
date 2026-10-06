@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.time.ZoneId;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -36,7 +37,7 @@ public class DailyStatementScheduler {
 
         try {
 
-            LocalDate today = LocalDate.now();
+        	LocalDate today = LocalDate.now(ZoneId.of("Asia/Kolkata"));
 
             LocalDateTime start = today.atStartOfDay();
 

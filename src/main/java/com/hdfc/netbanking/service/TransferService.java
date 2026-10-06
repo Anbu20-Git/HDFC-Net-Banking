@@ -1,6 +1,7 @@
 package com.hdfc.netbanking.service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,7 +81,8 @@ public class TransferService {
         transaction.setAmount(amount);
         transaction.setTransactionType("TRANSFER");
         transaction.setStatus("SUCCESS");
-        transaction.setTransactionDate(LocalDateTime.now());
+        transaction.setTransactionDate(
+                LocalDateTime.now(ZoneId.of("Asia/Kolkata")));
 
         transactionRepository.save(transaction);
 

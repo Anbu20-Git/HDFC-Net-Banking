@@ -2,6 +2,7 @@ package com.hdfc.netbanking.controller;
 
 import java.util.Map;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,10 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.hdfc.netbanking.service.MockPaymentService;
 
 @Controller
 public class PaymentController {
+	
+	private static final Logger logger =
+	        LoggerFactory.getLogger(PaymentController.class);
 
     private final MockPaymentService mockPaymentService;
 
@@ -61,9 +67,7 @@ public class PaymentController {
             return new RedirectView(paymentUrl);
 
         } catch (Exception e) {
-
-            e.printStackTrace();
-
+            logger.error("Payment initiation failed", e);
             return new RedirectView("/payment?error=Payment initiation failed");
         }
     }
@@ -90,7 +94,7 @@ public class PaymentController {
 
         } catch (Exception e) {
 
-            e.printStackTrace();
+        	logger.error("Payment verification failed", e);
 
             model.addAttribute("error","Payment verification failed: " + e.getMessage());
 

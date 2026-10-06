@@ -1,6 +1,9 @@
 package com.hdfc.netbanking.scheduler;
 
 import java.time.LocalDate;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,6 +16,9 @@ import com.hdfc.netbanking.service.StatementPdfService;
 
 @Component
 public class DailyStatementScheduler {
+	
+	private static final Logger logger =
+	        LoggerFactory.getLogger(DailyStatementScheduler.class);
 
     private final TransactionRepository transactionRepository;
     private final StatementPdfService statementPdfService;
@@ -90,7 +96,7 @@ public class DailyStatementScheduler {
                     "Error while generating daily statement PDF"
             );
 
-            e.printStackTrace();
+            logger.error("Error while generating daily statement PDF", e);
         }
     }
 }
